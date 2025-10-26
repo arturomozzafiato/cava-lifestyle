@@ -3,501 +3,447 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>CAVA Lifestyle – Demo</title>
+<title>CAVA Lifestyle – Bold Mediterranean Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --glass-fill: rgba(255,255,255,.06);
-    --glass-border: rgba(255,255,255,.12);
-    --text: #f8fafc;
-    --text-dim: rgba(248,250,252,.72);
-    --shadow: 0 10px 40px -10px rgba(0,0,0,.5);
-    --accent: #34d399;
+    --bg1:#0b1a2b; --bg2:#1b3c87; --bg3:#2f80ed; /* Aegean gradient */
+    --card:#0f172a; --glass:rgba(255,255,255,.06); --line:rgba(255,255,255,.12);
+    --text:#f8fafc; --muted:rgba(248,250,252,.72); --good:#34d399; --warn:#f59e0b; --alert:#fb7185;
+    --radius:20px; --shadow:0 18px 50px -12px rgba(0,0,0,.55);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    color:var(--text);
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji",sans-serif;
-    background: radial-gradient(1200px 800px at 20% -10%, rgba(255,255,255,.08), transparent),
-                linear-gradient(135deg,#F4A261,#E76F51,#8D4D3A); /* Terracotta Court default */
-    background-size: 200% 200%;
-    animation: pan 22s linear infinite;
+    margin:0; color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(1400px 800px at 20% -10%, rgba(255,255,255,.10), transparent),
+      linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+    background-size:200% 200%; animation:bgMove 26s linear infinite;
   }
-  @keyframes pan{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
-  .wrap{max-width:420px;margin:0 auto;padding:16px 16px 100px}
-  .header{
-    position:sticky;top:0;z-index:10;
-    backdrop-filter: blur(14px);
-    background: rgba(6,7,10,.35);
-    border-bottom:1px solid var(--glass-border);
-  }
-  .bar{display:flex;align-items:center;gap:12px;padding:12px 16px}
-  .badge{margin-left:auto;font-size:12px;background:rgba(16,185,129,.18);color:#A7F3D0;padding:6px 10px;border-radius:999px}
-  .btn{
-    appearance:none;border:0;cursor:pointer;
-    background:#fff;color:#0b0f14;
-    border-radius:12px;padding:10px 14px;font-weight:700;box-shadow:var(--shadow);
-  }
-  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--glass-border);box-shadow:none}
+  @keyframes bgMove{0%{background-position:0 0}50%{background-position:100% 100%}100%{background-position:0 0}}
+  .shell{max-width:440px;margin:0 auto;padding:16px 16px 120px}
+  .header{position:sticky;top:0;z-index:30;background:rgba(4,6,12,.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;gap:12px;align-items:center;padding:12px 16px}
+  h1{font:800 18px Manrope,Inter;margin:0}
+  .sub{color:var(--muted);font-size:12px}
+  .btn{appearance:none;border:0;border-radius:14px;padding:10px 14px;font-weight:700;cursor:pointer}
+  .btn.primary{background:#fff;color:#0b0f14;box-shadow:var(--shadow)}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
   .btn.small{padding:8px 10px;font-size:12px;border-radius:10px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .card{
-    border:1px solid var(--glass-border);
-    background:var(--glass-fill);
-    backdrop-filter: blur(18px);
-    border-radius:24px; padding:14px; box-shadow:var(--shadow)
-  }
-  .hero{border-radius:20px;overflow:hidden;border:1px solid var(--glass-border)}
-  .hero img{display:block;width:100%;height:180px;object-fit:cover;opacity:.85}
-  .muted{color:var(--text-dim);font-size:12px}
+  .card{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+  .hero{overflow:hidden;border-radius:var(--radius);border:1px solid var(--line)}
+  .hero img{display:block;width:100%;height:190px;object-fit:cover;opacity:.9}
   .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-  .tag{
-    font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid var(--glass-border);background:rgba(255,255,255,.08)
-  }
-  .tag.disliked{border-color:#fb7185;color:#fecdd3;background:rgba(251,113,133,.15)}
-  .nav{
-    position:fixed;left:0;right:0;bottom:16px;z-index:20;
-    display:flex;justify-content:center;pointer-events:none;
-  }
-  .nav_inner{
-    pointer-events:auto;
-    display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
-    max-width:420px; margin:0 16px; padding:8px;
-    border-radius:20px; backdrop-filter: blur(16px);
-    background:rgba(0,0,0,.4); border:1px solid var(--glass-border)
-  }
-  .nav_btn{
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-    padding:8px;border-radius:12px;cursor:pointer;font-size:11px;border:0;background:transparent;color:var(--text);
-  }
-  .nav_btn.active{background:rgba(255,255,255,.1);font-weight:600}
-  .stamp{display:grid;place-items:center;border:1px solid var(--glass-border);border-radius:16px;padding:16px;background:rgba(255,255,255,.06)}
-  .theme{margin-left:auto}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.08)}
+  .tag.disliked{border-color:var(--alert);color:#fecdd3;background:rgba(251,113,133,.15)}
+  .price{color:#bbf7d0;font-weight:700}
+  /* tabs */
+  .tabs{display:flex;gap:8px;margin:10px 0}
+  .tab{padding:8px 10px;border-radius:999px;border:1px solid var(--line);cursor:pointer;background:rgba(255,255,255,.06)}
+  .tab.active{background:#fff;color:#0b0f14;font-weight:700}
+  /* nav */
+  .nav{position:fixed;left:0;right:0;bottom:16px;display:flex;justify-content:center;pointer-events:none;z-index:40}
+  .navin{pointer-events:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:440px;margin:0 16px;padding:8px;background:rgba(2,6,12,.55);backdrop-filter:blur(16px);border-radius:18px;border:1px solid var(--line)}
+  .navbtn{background:transparent;border:0;color:var(--text);padding:8px;border-radius:12px;font-size:12px;cursor:pointer}
+  .navbtn.active{background:rgba(255,255,255,.12);font-weight:700}
+  /* modal sheet */
+  .overlay{position:fixed;inset:0;background:rgba(2,6,12,.72);display:none;align-items:flex-end;justify-content:center;padding:16px;z-index:50}
+  .overlay.show{display:flex}
+  .sheet{width:100%;max-width:440px;border:1px solid var(--line);background:rgba(12,18,30,.95);backdrop-filter:blur(20px);border-radius:22px;padding:16px}
+  .sheet h3{margin:0 0 8px 0}
+  .closeX{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}
+  canvas{background:#0b0f14;border:1px solid rgba(255,255,255,.2);border-radius:10px}
+  /* helpers */
   .hidden{display:none}
-  .counter{color:#fde68a}
-  /* modal */
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:grid;place-items:end;padding:16px;z-index:50}
-  .sheet{width:100%;max-width:420px;border:1px solid var(--glass-border);background:rgba(17,24,39,.9);backdrop-filter: blur(20px);border-radius:24px;padding:16px}
-  canvas{background:#0b0f14;border:1px solid rgba(255,255,255,.2);border-radius:8px}
-  /* tiny icon circles for nav */
-  .dot{width:8px;height:8px;background:#fff;border-radius:999px;opacity:.9}
+  .muted{color:var(--muted)}
+  .kpi{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{padding:6px 8px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-size:12px}
 </style>
 </head>
 <body>
-  <div class="header">
+  <header class="header" aria-label="Top">
     <div class="bar">
-      <div style="font-size:22px">🥙</div>
-      <div>
-        <div style="font:800 18px Manrope,Inter">CAVA Lifestyle</div>
-        <div class="muted">Mediterranean · Fast · Flavorful · Real</div>
-      </div>
-      <button id="themeBtn" class="btn small theme">Terracotta</button>
-      <div id="points" class="badge">0 pts</div>
+      <div style="font-size:22px">🥗</div>
+      <div><h1>CAVA Lifestyle</h1><div class="sub">Healthy · Mediterranean · Fast</div></div>
+      <button id="theme" class="btn small ghost" aria-label="Toggle theme">Aegean</button>
+      <div id="pts" class="pill" title="Loyalty points">0 pts</div>
     </div>
-  </div>
+  </header>
 
-  <div class="wrap">
+  <main class="shell">
     <!-- HOME -->
-    <div id="tab-home">
-      <div class="card hero" id="labsHero">
-        <img id="seasonImg" alt="">
+    <section id="home">
+      <div class="hero card">
+        <img id="seasonHero" alt="Seasonal hero image">
         <div style="padding:12px">
-          <div class="muted">Next Labs Drop</div>
-          <div style="font:800 20px Manrope,Inter" id="seasonTitle">Summer in Greece</div>
-          <div class="muted"><span class="counter" id="countdown">—</span> • <span id="pairings"></span></div>
+          <div class="sub">Seasonal menu</div>
+          <div style="font:800 22px Manrope,Inter" id="seasonTitle">—</div>
+          <div class="sub"><span id="countdown">—</span> • Pairings: <span id="pairings">—</span></div>
           <div style="margin-top:10px;display:flex;gap:8px">
-            <button class="btn small" id="trySpecial">Try today’s special</button>
-            <button class="btn small ghost" id="goSeason">Explore season</button>
+            <button class="btn small primary" id="btnTry">Try seasonal</button>
+            <button class="btn small ghost" id="btnStory">Story</button>
           </div>
         </div>
       </div>
 
-      <div class="card" id="pickCard" style="margin-top:12px">
+      <div class="card" style="margin-top:12px">
         <div class="row">
           <div>
-            <div class="muted">Today’s pick for you</div>
+            <div class="sub">AI pick for you</div>
             <div id="pickName" style="font-weight:700">—</div>
-            <div class="muted" id="pickMeta">—</div>
+            <div class="sub" id="pickMeta">—</div>
+            <div class="kpi" style="margin-top:6px">
+              <div id="medScore" class="pill">MedScore —</div>
+              <div id="carbon" class="pill">Carbon —</div>
+              <div id="cal" class="pill">— kcal</div>
+            </div>
           </div>
-          <img id="pickImg" src="" alt="" style="width:90px;height:90px;object-fit:cover;border-radius:14px;border:1px solid var(--glass-border)">
+          <img id="pickImg" alt="dish" style="width:96px;height:96px;object-fit:cover;border-radius:14px;border:1px solid var(--line)">
         </div>
-        <div class="row" style="margin-top:10px">
-          <div id="pickPrice" style="color:#bbf7d0;font-weight:700">$—</div>
+        <div class="row" style="margin-top:8px">
+          <div id="pickPrice" class="price">$—</div>
           <div style="display:flex;gap:8px">
-            <button class="btn small" id="orderPick">Order</button>
+            <button class="btn small primary" id="orderPick">Order</button>
             <button class="btn small ghost" id="openPass">Pickup Pass</button>
           </div>
         </div>
       </div>
 
       <div class="card" style="margin-top:12px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div>🌿</div><div style="font-weight:700">Pantry add-ons</div></div>
-        <div id="pantryChoices" class="tags"></div>
-        <div id="pantrySelected" class="muted" style="margin-top:6px"></div>
+        <div class="row"><div style="font-weight:700">Pantry add-ons</div><div class="sub">Tap to add</div></div>
+        <div id="pantry" class="tags" style="margin-top:8px"></div>
       </div>
-    </div>
+    </section>
 
-    <!-- SEASON -->
-    <div id="tab-season" class="hidden">
-      <div class="card hero">
-        <img id="seasonImg2" alt="">
+    <!-- MENU -->
+    <section id="menu" class="hidden">
+      <div class="tabs" role="tablist" aria-label="Diet filters">
+        <button class="tab active" data-filter="all" role="tab">All</button>
+        <button class="tab" data-filter="veg" role="tab">Vegetarian</button>
+        <button class="tab" data-filter="handheld" role="tab">Handheld</button>
+        <button class="tab" data-filter="bowl" role="tab">Bowls</button>
       </div>
-      <div class="card" style="margin-top:12px">
-        <div class="muted">Story</div>
-        <div id="seasonStory" style="margin-top:4px">—</div>
-        <div class="muted" style="margin-top:6px">Pairings: <span id="seasonPairs">—</span></div>
-        <div style="margin-top:10px;display:flex;gap:8px">
-          <button class="btn small" id="seasonTry">Try special</button>
-          <button class="btn small ghost" id="seasonNext">Next theme</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- EXPLORE -->
-    <div id="tab-explore" class="hidden"></div>
+      <div id="menuList"></div>
+    </section>
 
     <!-- JOURNEY -->
-    <div id="tab-journey" class="hidden">
+    <section id="journey" class="hidden">
       <div class="card">
-        <div style="font-weight:700;margin-bottom:6px">Taste Journey</div>
-        <div class="muted" style="margin-bottom:8px">Collect all three regions to unlock a bonus.</div>
-        <div class="grid2">
-          <div class="stamp"><div id="stamp-greece" style="font-size:24px">⬜</div><div class="muted">Greece</div></div>
-          <div class="stamp"><div id="stamp-levant" style="font-size:24px">⬜</div><div class="muted">Levant</div></div>
-          <div class="stamp"><div id="stamp-maghreb" style="font-size:24px">⬜</div><div class="muted">Maghreb</div></div>
-          <div class="stamp"><div class="muted">Reward</div><div class="muted">+100 pts when complete</div></div>
+        <div style="font-weight:800;margin-bottom:6px">Taste Journey</div>
+        <div class="sub">Collect regional stamps to unlock chef drops.</div>
+        <div class="tags" style="margin-top:8px">
+          <div id="stamp-Greece" class="pill">Greece ⬜</div>
+          <div id="stamp-Levant" class="pill">Levant ⬜</div>
+          <div id="stamp-Maghreb" class="pill">Maghreb ⬜</div>
         </div>
-        <button class="btn" style="margin-top:12px" id="redeem">Redeem Journey</button>
+        <button id="redeem" class="btn small ghost" style="margin-top:10px">Redeem reward</button>
       </div>
-    </div>
+    </section>
 
     <!-- PROFILE -->
-    <div id="tab-profile" class="hidden">
+    <section id="profile" class="hidden">
       <div class="card">
-        <div style="font-weight:700;margin-bottom:6px">Your preferences</div>
+        <div style="font-weight:800;margin-bottom:6px">Your preferences</div>
         <label class="row" style="padding:6px 0"><span>Vegetarian</span><input type="checkbox" id="prefVeg"></label>
         <label class="row" style="padding:6px 0"><span>Like it spicy</span><input type="checkbox" id="prefSpicy"></label>
         <div class="row" style="padding:6px 0">
           <span>Budget</span>
-          <select id="prefBudget" style="background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--glass-border);border-radius:8px;padding:6px 8px">
+          <select id="prefBudget" style="background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:6px 8px">
             <option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option>
           </select>
         </div>
-        <div class="muted">Tip: mark dislikes on Explore by tapping tags.</div>
+        <div class="sub">Data controls: this demo stores preferences locally. Toggle any time.</div>
       </div>
       <div class="card" style="margin-top:12px">
-        <div style="font-weight:700;margin-bottom:6px">History</div>
-        <ul id="history" class="muted" style="padding-left:18px;margin:0"></ul>
+        <div class="row"><div style="font-weight:800">Corporate</div>
+          <button id="corpCode" class="btn small ghost">Enter code</button></div>
+        <div class="sub">Use your company code to unlock stipend & office-drop.</div>
       </div>
       <div class="card" style="margin-top:12px">
-        <button class="btn ghost" id="reset">Reset demo data</button>
+        <div style="font-weight:800;margin-bottom:6px">Recent orders</div>
+        <ul id="history" class="sub" style="margin:0 0 4px 18px"></ul>
+        <button id="reset" class="btn small ghost">Reset demo</button>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- BOTTOM NAV -->
-  <div class="nav">
-    <div class="nav_inner">
-      <button class="nav_btn active" data-tab="home"><div class="dot"></div>Home</button>
-      <button class="nav_btn" data-tab="season"><div class="dot"></div>Season</button>
-      <button class="nav_btn" data-tab="explore"><div class="dot"></div>Explore</button>
-      <button class="nav_btn" data-tab="journey"><div class="dot"></div>Journey</button>
-      <button class="nav_btn" data-tab="profile"><div class="dot"></div>Profile</button>
+  <!-- bottom nav -->
+  <nav class="nav" aria-label="Bottom navigation">
+    <div class="navin">
+      <button class="navbtn active" data-target="home">Home</button>
+      <button class="navbtn" data-target="menu">Menu</button>
+      <button class="navbtn" data-target="journey">Journey</button>
+      <button class="navbtn" data-target="profile">Profile</button>
+      <button class="navbtn" id="passQuick">Pass</button>
     </div>
-  </div>
+  </nav>
 
-  <!-- PICKUP PASS MODAL -->
-  <div id="passOverlay" class="overlay hidden">
-    <div class="sheet">
-      <div class="row" style="margin-bottom:8px"><div style="font-weight:700">Pickup Pass</div><button class="btn small ghost" id="closePass">Close</button></div>
+  <!-- pickup pass modal -->
+  <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-label="Pickup Pass">
+    <div class="sheet" role="document">
+      <div class="row" style="margin-bottom:8px"><h3>Pickup Pass</h3><button class="closeX" id="closeX" aria-label="Close">Close</button></div>
       <div class="row">
-        <canvas id="qr" width="120" height="120"></canvas>
+        <canvas id="qr" width="120" height="120" aria-label="Code"></canvas>
         <div>
-          <div class="muted">Dynamic PIN</div>
-          <div id="pin" style="letter-spacing:4px;font:800 28px Manrope,Inter">—</div>
-          <div class="muted">Refresh in <span id="refresh">—</span>s</div>
-          <div class="muted" style="margin-top:8px">Show this at pickup. Staff can scan the code or enter PIN.</div>
+          <div class="sub">Dynamic PIN</div>
+          <div id="pin" style="font:800 28px Manrope,Inter;letter-spacing:4px">—</div>
+          <div class="sub">Refresh in <span id="refresh">—</span>s</div>
+          <div class="sub" style="margin-top:6px">Show at pickup • Scan code or enter PIN</div>
         </div>
       </div>
-      <div class="row" style="margin-top:12px">
-        <button id="copyPIN" class="btn small">Copy PIN</button>
-        <button id="simulateScan" class="btn small ghost">Simulate scan</button>
+      <div class="row" style="margin-top:10px">
+        <button id="copy" class="btn small primary">Copy PIN</button>
+        <button id="simulate" class="btn small ghost">Simulate scan</button>
       </div>
     </div>
   </div>
 
 <script>
 /* ---------- Data ---------- */
-const IMAGES = {
-  greece: "https://images.unsplash.com/photo-1543353071-087092ec393a?q=80&w=1600&auto=format&fit=crop",
-  levant: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=1600&auto=format&fit=crop",
-  maghreb: "https://images.unsplash.com/photo-1505577058444-a3dab90d4253?q=80&w=1600&auto=format&fit=crop",
-  pita: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1600&auto=format&fit=crop",
-  bowl: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=1600&auto=format&fit=crop",
-  mezze: "https://images.unsplash.com/photo-1604908554007-1688f52b0b43?q=80&w=1600&auto=format&fit=crop",
+const IMG={
+  greece:"https://images.unsplash.com/photo-1543353071-087092ec393a?q=80&w=1400&auto=format&fit=crop",
+  levant:"https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=1400&auto=format&fit=crop",
+  maghreb:"https://images.unsplash.com/photo-1505577058444-a3dab90d4253?q=80&w=1400&auto=format&fit=crop",
+  pita:"https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1600&auto=format&fit=crop",
+  bowl:"https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=1600&auto=format&fit=crop",
+  mezze:"https://images.unsplash.com/photo-1604908554007-1688f52b0b43?q=80&w=1600&auto=format&fit=crop",
 };
-const MENU = [
-  { id:"1", name:"Harissa Chicken Pita", type:"handheld", region:"Levant", spicy:true, vegetarian:false, calories:610, price:10.95, image:IMAGES.pita, tags:["protein","harissa","pita"] },
-  { id:"2", name:"Mediterranean Greens Bowl", type:"bowl", region:"Greece", spicy:false, vegetarian:true, calories:520, price:10.45, image:IMAGES.bowl, tags:["greens","feta","tahini"] },
-  { id:"3", name:"Lamb Meatball Plate", type:"plate", region:"Levant", spicy:false, vegetarian:false, calories:680, price:12.25, image:IMAGES.mezze, tags:["lamb","plate","mezze"] },
-  { id:"4", name:"Falafel Mezze Box", type:"mezze", region:"Maghreb", spicy:false, vegetarian:true, calories:560, price:9.95, image:IMAGES.mezze, tags:["falafel","mezze","shareable"] },
-  { id:"5", name:"Zhoug Salmon Plate", type:"plate", region:"Levant", spicy:true, vegetarian:false, calories:640, price:13.50, image:IMAGES.levant, tags:["fish","zhoug","herbs"] },
+const MENU=[
+ {id:"1",name:"Harissa Chicken Pita",type:"handheld",region:"Levant",veg:false,spicy:true,cal:610,price:10.95,img:IMG.pita, tags:["protein","harissa","pita"], score:{olive:2,legume:0,veg:2,grain:2,fish:0}},
+ {id:"2",name:"Mediterranean Greens Bowl",type:"bowl",region:"Greece",veg:true,spicy:false,cal:520,price:10.45,img:IMG.bowl, tags:["greens","feta","tahini"], score:{olive:2,legume:1,veg:3,grain:1,fish:0}},
+ {id:"3",name:"Falafel Mezze Box",type:"mezze",region:"Maghreb",veg:true,spicy:false,cal:560,price:9.95,img:IMG.mezze, tags:["falafel","mezze","shareable"], score:{olive:2,legume:3,veg:2,grain:1,fish:0}},
+ {id:"4",name:"Lamb Meatball Plate",type:"plate",region:"Levant",veg:false,spicy:false,cal:680,price:12.25,img:IMG.mezze, tags:["lamb","plate"], score:{olive:1,legume:0,veg:2,grain:1,fish:0}},
+ {id:"5",name:"Zhoug Salmon Plate",type:"plate",region:"Levant",veg:false,spicy:true,cal:640,price:13.50,img:IMG.levant, tags:["fish","zhoug","herbs"], score:{olive:2,legume:0,veg:2,grain:1,fish:3}},
 ];
-const SEASONS = [
-  { code:"summer-greece", title:"Summer in Greece", story:"Citrus, dill, and extra-virgin olive oil. Sourcing spotlight: Peloponnese co-op.", hero:IMAGES.greece, pairings:["Lemon-dill tzatziki","Iced mint tea"] },
-  { code:"autumn-levant", title:"Autumn in the Levant", story:"Sumac, pomegranate, and slow-roasted meats. Sourcing spotlight: Bekaa Valley grains.", hero:IMAGES.levant, pairings:["Pomegranate dressing","Spiced lentil soup"] },
-  { code:"winter-maghreb", title:"Winter in the Maghreb", story:"Harissa warmth, roasted roots, preserved lemon.", hero:IMAGES.maghreb, pairings:["Harissa","Couscous"] },
+const SEASONS=[
+ {code:"summer-greece",title:"Summer in Greece",hero:IMG.greece, pair:["Lemon-dill tzatziki","Iced mint tea"], story:"Citrus, dill & EVOO. Partner: Peloponnese olive co-op."},
+ {code:"autumn-levant",title:"Autumn in the Levant",hero:IMG.levant, pair:["Pomegranate dressing","Spiced lentil soup"], story:"Sumac & pomegranate. Partner: Bekaa Valley grains."},
+ {code:"winter-maghreb",title:"Winter in the Maghreb",hero:IMG.maghreb, pair:["Harissa","Couscous"], story:"Preserved lemon & warm spices."},
 ];
-const THEMES = {
-  terracotta:["#F4A261","#E76F51","#8D4D3A"],
-  athens:["#FFB703","#FB8500","#E63946"],
-  marrakesh:["#2EC4B6","#00A896","#028090"],
-};
 
-/* ---------- State & storage ---------- */
-const load = (k,f)=>{ try{const v=localStorage.getItem(k); return v?JSON.parse(v):f;}catch{return f;} };
-const save = (k,v)=>{ try{localStorage.setItem(k,JSON.stringify(v));}catch{} };
-
-let prefs = load("prefs",{vegetarian:false,spicy:false,budget:"medium",disliked:[]});
-let orders = load("orders",[]);
-let points = load("points",0);
-let stamps = load("stamps",{Greece:false,Levant:false,Maghreb:false});
-let pantry = load("pantry",[]);
-let seasonIndex = load("seasonIndex",0);
-let theme = load("theme","terracotta");
+/* ---------- Local state ---------- */
+const load=(k,f)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch{return f}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+let prefs=load("prefs",{veg:false,spicy:false,budget:"medium",disliked:[]});
+let orders=load("orders",[]);
+let points=load("points",0);
+let stamps=load("stamps",{Greece:false,Levant:false,Maghreb:false});
+let season=load("season",0);
 
 /* ---------- Helpers ---------- */
-function scoreItem(item,prefs,history){
-  let s = 0;
-  if (prefs.vegetarian && item.vegetarian) s+=2;
-  if (!prefs.vegetarian && !item.vegetarian) s+=1;
-  if (prefs.spicy === item.spicy) s+=1.5;
-  if (prefs.disliked?.some(d=> item.tags.includes(d))) s -= 5;
-  if (prefs.budget==="low" && item.price<=10) s+=1.5;
-  if (prefs.budget==="medium" && item.price<=12) s+=1.0;
-  if (prefs.budget==="high") s+=0.5;
-  const times = history.filter(h=>h.id===item.id).length;
-  s += times===0 ? 1.2 : Math.max(0, .8 - times*.2);
+function carbonEstimate(item){
+  // extremely simplified demo: fish/veg lower, red meat higher
+  if(item.tags.includes("fish")) return "Low";
+  if(item.tags.includes("lamb")) return "High";
+  return "Medium";
+}
+function medScore(s){ // 0-10
+  return Math.min(10, s.olive + s.legume + s.veg + s.grain + s.fish);
+}
+function fitBudget(item){ const b=prefs.budget; return (b==="low"&&item.price<=10)||(b==="medium"&&item.price<=12)||b==="high";}
+function aiScore(item){
+  let s=0;
+  if(prefs.veg===item.veg) s+=1.5;
+  if(prefs.spicy===item.spicy) s+=1.0;
+  if(fitBudget(item)) s+=1.0;
+  if(prefs.disliked.some(d=>item.tags.includes(d))) s-=4;
+  const times=orders.filter(o=>o.id===item.id).length;
+  s+= times===0?1.2:Math.max(0,.8-times*.2);
+  s+= medScore(item.score)/10; // bias towards healthier Med composition
   return s;
 }
-function pickTop(){
-  return [...MENU].sort((a,b)=> scoreItem(b,prefs,orders)-scoreItem(a,prefs,orders))[0];
+function pickAI(){ return [...MENU].sort((a,b)=>aiScore(b)-aiScore(a))[0];}
+function fmt$ (n){return "$"+n.toFixed(2)}
+function inDays(d){ const t=Date.now(), diff=new Date(d).getTime()-t; const days=Math.max(0,Math.floor(diff/86400000)); const h=Math.max(0,Math.floor((diff%86400000)/3600000)); const m=Math.max(0,Math.floor((diff%3600000)/60000)); return `${days}d ${h}h ${m}m`; }
+function nextDropISO(){ const d=new Date(); d.setDate(d.getDate()+6); return d.toISOString(); }
+function pinNow(){ const slot=Math.floor(Date.now()/20000); const pin=(slot%1000000).toString().padStart(6,"0"); const left=20-Math.floor((Date.now()/1000)%20); return {pin, left};}
+function drawQR(canvas, seed){
+  const N=21, ctx=canvas.getContext("2d"); const cell=Math.floor(canvas.width/N);
+  ctx.fillStyle="#0b0f14"; ctx.fillRect(0,0,canvas.width,canvas.height);
+  // simple hash → pseudo pattern
+  let h=0; for(let i=0;i<seed.length;i++){h=((h<<5)-h)+seed.charCodeAt(i);h|=0;}
+  for(let i=0;i<N*N;i++){ const on=(h>>(i%31)) & 1; if(on){ const x=(i%N)*cell, y=Math.floor(i/N)*cell; ctx.fillStyle="#fff"; ctx.fillRect(x+1,y+1,cell-2,cell-2); } }
 }
-function fmtPrice(n){ return "$"+n.toFixed(2); }
-
-function labsCountdownISO(iso){
-  const t = new Date(iso).getTime(), now=Date.now(), d=Math.max(0,t-now);
-  const days=Math.floor(d/86400000), hours=Math.floor((d%86400000)/3600000), mins=Math.floor((d%3600000)/60000);
-  return {days,hours,mins};
-}
-function targetNextWeekISO(){ const dd = new Date(); dd.setDate(dd.getDate()+7); return dd.toISOString(); }
-
-function rollingPIN(ts=Date.now()){
-  const slot = Math.floor(ts/20000); // 20s window
-  const pin = (slot % 1000000).toString().padStart(6,"0");
-  const refresh = 20 - Math.floor((ts/1000) % 20);
-  return {pin, refresh};
-}
-function drawPseudoQR(canvas, seedStr){
-  const ctx = canvas.getContext('2d');
-  const N = 21; const cell = Math.floor(canvas.width/N);
-  ctx.fillStyle = "#0b0f14"; ctx.fillRect(0,0,canvas.width,canvas.height);
-  // simple hash
-  let h=0; for(let i=0;i<seedStr.length;i++){ h=((h<<5)-h)+seedStr.charCodeAt(i); h|=0; }
-  for(let i=0;i<N*N;i++){
-    const bit = (h >> (i % 31)) & 1;
-    if(bit){
-      const x=(i%N)*cell, y=Math.floor(i/N)*cell;
-      ctx.fillStyle="#fff"; ctx.fillRect(x+1,y+1,cell-2,cell-2);
-    }
-  }
-}
-
-/* ---------- Theme ---------- */
-function applyTheme(name){
-  const g = THEMES[name] || THEMES.terracotta;
-  document.body.style.backgroundImage =
-    `radial-gradient(1200px 800px at 20% -10%, rgba(255,255,255,.08), transparent),
-     linear-gradient(135deg, ${g[0]}, ${g[1]}, ${g[2]})`;
-  document.getElementById("themeBtn").textContent =
-    (name==="terracotta"?"Terracotta":name==="athens"?"Athens":"Marrakesh");
-  theme = name; save("theme", theme);
-}
-
-/* ---------- UI refs ---------- */
-const ptsEl = document.getElementById("points");
-const tabs = ["home","season","explore","journey","profile"];
-const tabEls = Object.fromEntries(tabs.map(t=>[t,document.getElementById("tab-"+t)]));
 
 /* ---------- Renderers ---------- */
-function renderHome(){
-  const s = SEASONS[seasonIndex % SEASONS.length];
-  document.getElementById("seasonImg").src = s.hero;
-  document.getElementById("seasonTitle").textContent = s.title;
-  document.getElementById("pairings").textContent = s.pairings.join(" · ");
-
-  const pick = pickTop();
-  document.getElementById("pickName").textContent = pick.name;
-  document.getElementById("pickMeta").textContent = `${pick.region} · ${pick.type} · ${pick.calories} cal`;
-  document.getElementById("pickImg").src = pick.image;
-  document.getElementById("pickPrice").textContent = fmtPrice(pick.price);
-
-  // pantry choices
-  const choices = ["Hummus","Tzatziki","Pita","Grain Kit"];
-  const pc = document.getElementById("pantryChoices"); pc.innerHTML="";
-  choices.forEach(x=>{
-    const b = document.createElement("button");
-    b.className="tag"; b.textContent = "+ "+x;
-    b.onclick=()=>{ if(!pantry.includes(x)) { pantry.push(x); save("pantry", pantry); renderPantrySelected(); } };
-    pc.appendChild(b);
-  });
-  renderPantrySelected();
-}
-function renderPantrySelected(){
-  const sel = document.getElementById("pantrySelected");
-  sel.textContent = pantry.length ? ("Selected: "+pantry.join(", ")) : "";
-}
 function renderSeason(){
-  const s = SEASONS[seasonIndex % SEASONS.length];
-  document.getElementById("seasonImg2").src = s.hero;
-  document.getElementById("seasonStory").textContent = s.story;
-  document.getElementById("seasonPairs").textContent = s.pairings.join(" · ");
+  const s=SEASONS[season%SEASONS.length];
+  document.getElementById("seasonHero").src=s.hero;
+  document.getElementById("seasonTitle").textContent=s.title;
+  document.getElementById("pairings").textContent=s.pair.join(" · ");
+  document.getElementById("countdown").textContent=inDays(nextDropISO());
 }
-function renderExplore(){
-  const host = document.getElementById("tab-explore");
-  host.innerHTML = "";
-  MENU.forEach(item=>{
-    const card = document.createElement("div"); card.className="card";
-    const row = document.createElement("div"); row.className="row";
-    const left = document.createElement("div");
-    left.innerHTML = `<div style="font-weight:700">${item.name}</div>
-                      <div class="muted">${item.region} · ${item.type} · ${item.calories} cal</div>`;
-    const img = document.createElement("img");
-    img.src=item.image; img.style="width:90px;height:90px;object-fit:cover;border-radius:14px;border:1px solid var(--glass-border)";
+function renderAI(){
+  const it=pickAI();
+  document.getElementById("pickName").textContent=it.name;
+  document.getElementById("pickMeta").textContent=`${it.region} · ${it.type}`;
+  document.getElementById("pickImg").src=it.img;
+  document.getElementById("pickPrice").textContent=fmt$(it.price);
+  document.getElementById("medScore").textContent=`MedScore ${medScore(it.score)}/10`;
+  document.getElementById("carbon").textContent=`Carbon ${carbonEstimate(it)}`;
+  document.getElementById("cal").textContent=`${it.cal} kcal`;
+}
+function renderPantry(){
+  const host=document.getElementById("pantry"); host.innerHTML="";
+  ["Hummus","Tzatziki","Pita","Grain Kit"].forEach(p=>{
+    const b=document.createElement("button"); b.className="tag"; b.textContent="+ "+p;
+    b.onclick=()=>{ orders.unshift({id:"pantry-"+p,name:p,price:2.00,ts:Date.now()}); points+=2; save("points",points); renderPoints(); alert("Added: "+p);}
+    host.appendChild(b);
+  });
+}
+function renderMenu(filter="all"){
+  const root=document.getElementById("menuList"); root.innerHTML="";
+  MENU.filter(m=>{
+    if(filter==="veg") return m.veg;
+    if(filter==="handheld") return m.type==="handheld";
+    if(filter==="bowl") return m.type==="bowl";
+    return true;
+  }).forEach(m=>{
+    const card=document.createElement("div"); card.className="card"; card.style.marginTop="10px";
+    const row=document.createElement("div"); row.className="row";
+    const left=document.createElement("div");
+    left.innerHTML=`<div style="font-weight:800">${m.name}</div>
+                    <div class="sub">${m.region} · ${m.type}</div>
+                    <div class="tags" style="margin-top:6px">${m.tags.map(t=>`<span class="tag ${prefs.disliked.includes(t)?'disliked':''}">#${t}</span>`).join("")}</div>`;
+    const img=document.createElement("img"); img.src=m.img; img.alt=m.name; img.style="width:96px;height:96px;object-fit:cover;border-radius:14px;border:1px solid var(--line)";
     row.append(left,img);
-    const tags = document.createElement("div"); tags.className="tags";
-    item.tags.forEach(t=>{
-      const sp=document.createElement("span"); sp.className="tag"+(prefs.disliked.includes(t)?" disliked":"");
-      sp.textContent="#"+t;
-      sp.onclick=()=>{ toggleDisliked(t); renderExplore(); };
-      tags.appendChild(sp);
+    const foot=document.createElement("div"); foot.className="row"; foot.style.marginTop="8px";
+    const kpis=document.createElement("div"); kpis.className="kpi";
+    kpis.innerHTML=`<div class="pill">MedScore ${medScore(m.score)}/10</div><div class="pill">${m.cal} kcal</div><div class="pill">${carbonEstimate(m)}</div>`;
+    const r=document.createElement("div");
+    r.innerHTML=`<span class="price">${fmt$(m.price)}</span>`;
+    const act=document.createElement("div"); act.style.display="flex"; act.style.gap="8px";
+    const add=document.createElement("button"); add.className="btn small primary"; add.textContent="Add";
+    add.onclick=()=>placeOrder(m);
+    foot.append(kpis, act);
+    act.append(r,add);
+    card.append(row,foot);
+    // clickable tags to dislike/undo
+    card.querySelectorAll(".tag").forEach(el=>{
+      el.onclick=()=>{ const tag=el.textContent.replace("#",""); toggleDislike(tag); renderMenu(filter); renderAI(); };
     });
-    const foot = document.createElement("div"); foot.className="row"; foot.style="margin-top:8px";
-    const price = document.createElement("div"); price.style="color:#bbf7d0;font-weight:700"; price.textContent=fmtPrice(item.price);
-    const add = document.createElement("button"); add.className="btn small"; add.textContent="Add";
-    add.onclick=()=> placeOrder(item,{pantryAdds:pantry});
-    foot.append(price,add);
-    card.append(row,tags,foot);
-    host.appendChild(card);
+    root.appendChild(card);
   });
 }
 function renderJourney(){
-  document.getElementById("stamp-greece").textContent = stamps.Greece ? "✅" : "⬜";
-  document.getElementById("stamp-levant").textContent = stamps.Levant ? "✅" : "⬜";
-  document.getElementById("stamp-maghreb").textContent = stamps.Maghreb ? "✅" : "⬜";
+  document.getElementById("stamp-Greece").textContent=`Greece ${stamps.Greece?"✅":"⬜"}`;
+  document.getElementById("stamp-Levant").textContent=`Levant ${stamps.Levant?"✅":"⬜"}`;
+  document.getElementById("stamp-Maghreb").textContent=`Maghreb ${stamps.Maghreb?"✅":"⬜"}`;
 }
 function renderProfile(){
-  document.getElementById("prefVeg").checked = prefs.vegetarian;
-  document.getElementById("prefSpicy").checked = prefs.spicy;
-  document.getElementById("prefBudget").value = prefs.budget;
-  // history
+  document.getElementById("prefVeg").checked=prefs.veg;
+  document.getElementById("prefSpicy").checked=prefs.spicy;
+  document.getElementById("prefBudget").value=prefs.budget;
   const ul=document.getElementById("history"); ul.innerHTML="";
-  orders.forEach(o=>{
-    const li=document.createElement("li");
-    li.textContent = `${o.name} — ${fmtPrice(o.price)}`;
-    ul.appendChild(li);
-  });
+  orders.slice(0,6).forEach(o=>{ const li=document.createElement("li"); li.textContent=`${o.name}`; ul.appendChild(li);});
 }
-function renderPoints(){ ptsEl.textContent = points+" pts"; }
+function renderPoints(){ document.getElementById("pts").textContent = `${points} pts`; }
 
 /* ---------- Actions ---------- */
-function toggleDisliked(tag){
-  if (prefs.disliked.includes(tag)) prefs.disliked = prefs.disliked.filter(t=>t!==tag);
+function placeOrder(item){
+  orders=[{id:item.id,name:item.name,price:item.price,ts:Date.now()},...orders]; save("orders",orders);
+  points+=10; save("points",points);
+  if(stamps[item.region]===false) { stamps[item.region]=true; save("stamps",stamps); }
+  alert(`Ordered: ${item.name}  +10 pts`);
+  renderAI(); renderJourney(); renderProfile(); renderPoints();
+}
+function toggleDislike(tag){
+  if(prefs.disliked.includes(tag)) prefs.disliked=prefs.disliked.filter(t=>t!==tag);
   else prefs.disliked.push(tag);
   save("prefs",prefs);
 }
-function placeOrder(item, opts={pantryAdds:[]}){
-  orders = [{id:item.id,name:item.name,price:item.price,ts:Date.now(),pantry:opts.pantryAdds}, ...orders];
-  save("orders",orders);
-  const earned = 10 + (opts.pantryAdds?.length||0)*2;
-  points += earned; save("points",points);
-  if (stamps[item.region]===false){ stamps[item.region]=true; save("stamps",stamps); }
-  alert(`Ordered: ${item.name}  +${earned} pts`);
-  renderHome(); renderJourney(); renderProfile(); renderPoints();
-}
 
-/* ---------- Tabs ---------- */
-document.querySelectorAll(".nav_btn").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    const t = btn.getAttribute("data-tab");
-    document.querySelectorAll(".nav_btn").forEach(b=> b.classList.toggle("active", b===btn));
-    tabs.forEach(k=> tabEls[k].classList.toggle("hidden", k!==t));
-    if(t==="home") renderHome();
-    if(t==="season") renderSeason();
-    if(t==="explore") renderExplore();
-    if(t==="journey") renderJourney();
-    if(t==="profile") renderProfile();
+/* ---------- Tabs & Filters ---------- */
+document.querySelectorAll(".navbtn").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const t=b.dataset.target;
+    document.querySelectorAll(".navbtn").forEach(x=>x.classList.toggle("active",x===b));
+    ["home","menu","journey","profile"].forEach(id=>document.getElementById(id).classList.toggle("hidden",id!==t));
+    if(t==="menu") renderMenu(document.querySelector(".tab.active").dataset.filter);
+  });
+});
+document.querySelectorAll(".tab").forEach(tb=>{
+  tb.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    tb.classList.add("active");
+    renderMenu(tb.dataset.filter);
   });
 });
 
-/* ---------- Event bindings ---------- */
-document.getElementById("orderPick").onclick = ()=> placeOrder(pickTop(), {pantryAdds:pantry});
-document.getElementById("trySpecial").onclick = ()=> placeOrder(pickTop(), {pantryAdds:pantry});
-document.getElementById("goSeason").onclick = ()=> document.querySelector('.nav_btn[data-tab="season"]').click();
-document.getElementById("seasonTry").onclick = ()=> placeOrder(pickTop(), {pantryAdds:pantry});
-document.getElementById("seasonNext").onclick = ()=>{
-  seasonIndex = (seasonIndex+1) % SEASONS.length; save("seasonIndex",seasonIndex); renderSeason(); renderHome();
-};
-document.getElementById("openPass").onclick = ()=> showPass(true);
-document.getElementById("closePass").onclick = ()=> showPass(false);
-document.getElementById("copyPIN").onclick = ()=>{
-  const t=document.getElementById("pin").textContent.replace(/\s/g,"");
-  navigator.clipboard?.writeText(t);
-  alert("PIN copied: "+t);
-};
-document.getElementById("simulateScan").onclick = ()=>{ alert("Scanned ✓ — handoff authorized."); };
+/* ---------- Preferences ---------- */
+document.getElementById("prefVeg").onchange=e=>{prefs.veg=e.target.checked; save("prefs",prefs); renderAI(); renderMenu(document.querySelector(".tab.active").dataset.filter);}
+document.getElementById("prefSpicy").onchange=e=>{prefs.spicy=e.target.checked; save("prefs",prefs); renderAI();}
+document.getElementById("prefBudget").onchange=e=>{prefs.budget=e.target.value; save("prefs",prefs); renderAI();}
+document.getElementById("reset").onclick=()=>{ localStorage.clear(); location.reload(); }
+document.getElementById("corpCode").onclick=()=>{ const c=prompt("Enter company code (demo accepts: CAVA)"); alert(c==="CAVA"?"Stipend unlocked (demo)":"Invalid code (demo)"); }
 
-document.getElementById("prefVeg").onchange = e=>{ prefs.vegetarian=e.target.checked; save("prefs",prefs); renderHome(); };
-document.getElementById("prefSpicy").onchange = e=>{ prefs.spicy=e.target.checked; save("prefs",prefs); renderHome(); };
-document.getElementById("prefBudget").onchange = e=>{ prefs.budget=e.target.value; save("prefs",prefs); renderHome(); };
-document.getElementById("reset").onclick = ()=>{ localStorage.clear(); location.reload(); };
+/* ---------- Seasonal actions ---------- */
+document.getElementById("btnTry").onclick=()=>placeOrder(pickAI());
+document.getElementById("btnStory").onclick=()=>{ season=(season+1)%SEASONS.length; save("season",season); renderSeason(); }
 
-document.getElementById("themeBtn").onclick = ()=>{
-  const cycle = theme==="terracotta" ? "athens" : theme==="athens" ? "marrakesh" : "terracotta";
-  applyTheme(cycle);
-};
-
-/* ---------- Pickup Pass ---------- */
-let passTimer = null;
+/* ---------- Pickup Pass (accessible, closable) ---------- */
+const overlay=document.getElementById("overlay");
+const openers=[document.getElementById("openPass"),document.getElementById("passQuick")];
+openers.forEach(o=>o.addEventListener("click",()=>showPass(true)));
+document.getElementById("closeX").addEventListener("click",()=>showPass(false));
+overlay.addEventListener("click",(e)=>{ if(e.target===overlay) showPass(false); }); // click outside to close
+document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") showPass(false); });
+let passTimer=null;
 function showPass(open){
-  const ov = document.getElementById("passOverlay");
-  ov.classList.toggle("hidden", !open);
+  overlay.classList.toggle("show",open);
+  overlay.setAttribute("aria-hidden", open?"false":"true");
   if(open){
-    updatePIN();
-    passTimer = setInterval(updatePIN, 1000);
-  } else if(passTimer){ clearInterval(passTimer); passTimer=null; }
+    updatePIN(); passTimer=setInterval(updatePIN,1000);
+    // focus trap (simple)
+    document.getElementById("closeX").focus();
+    document.body.style.overflow="hidden";
+  }else{
+    clearInterval(passTimer); passTimer=null; document.body.style.overflow="";
+  }
 }
 function updatePIN(){
-  const {pin, refresh} = rollingPIN();
-  document.getElementById("pin").textContent = pin.slice(0,3)+" "+pin.slice(3);
-  document.getElementById("refresh").textContent = refresh;
-  drawPseudoQR(document.getElementById("qr"), pin);
+  const {pin,left}=pinNow();
+  document.getElementById("pin").textContent=pin.slice(0,3)+" "+pin.slice(3);
+  document.getElementById("refresh").textContent=left;
+  drawQR(document.getElementById("qr"), pin);
+}
+document.getElementById("copy").onclick=()=>{ const t=document.getElementById("pin").textContent.replace(/\s/g,""); navigator.clipboard?.writeText(t); alert("PIN copied: "+t); }
+document.getElementById("simulate").onclick=()=> alert("Scan OK ✓ — order released");
+
+/* ---------- Theme toggle ---------- */
+document.getElementById("theme").onclick=()=>{
+  const c=document.documentElement.style;
+  const current=c.getPropertyValue("--bg1");
+  // cycle Aegean → Terracotta → Marrakesh
+  if(current==="" || current==="#0b1a2b"){ // to Terracotta
+    c.setProperty("--bg1","#8D4D3A"); c.setProperty("--bg2","#E76F51"); c.setProperty("--bg3","#F4A261");
+    document.getElementById("theme").textContent="Terracotta";
+  }else if(current==="#8D4D3A"){ // to Marrakesh
+    c.setProperty("--bg1","#028090"); c.setProperty("--bg2","#00A896"); c.setProperty("--bg3","#2EC4B6");
+    document.getElementById("theme").textContent="Marrakesh";
+  }else{ // back to Aegean
+    c.setProperty("--bg1","#0b1a2b"); c.setProperty("--bg2","#1b3c87"); c.setProperty("--bg3","#2f80ed");
+    document.getElementById("theme").textContent="Aegean";
+  }
+};
+
+/* ---------- Points / Journey ---------- */
+document.getElementById("redeem").onclick=()=>{
+  if(stamps.Greece && stamps.Levant && stamps.Maghreb){ points+=100; save("points",points); alert("Redeemed +100 pts!"); }
+  else alert("Collect all stamps first.");
+  renderPoints();
 }
 
-/* ---------- Countdown loop ---------- */
-const dropISO = targetNextWeekISO();
-setInterval(()=>{
-  const c = labsCountdownISO(dropISO);
-  document.getElementById("countdown").textContent = `${c.days}d ${c.hours}h ${c.mins}m`;
-}, 1000);
-
-/* ---------- Initial render ---------- */
-applyTheme(theme);
-renderHome(); renderSeason(); renderExplore(); renderJourney(); renderProfile(); renderPoints();
+/* ---------- Init ---------- */
+function init(){
+  renderSeason(); renderAI(); renderPantry(); renderMenu("all"); renderJourney(); renderProfile(); renderPoints();
+  // season countdown refresh
+  setInterval(()=>{ document.getElementById("countdown").textContent=inDays(nextDropISO()); },60000);
+}
+init();
 </script>
 </body>
 </html>
